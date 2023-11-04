@@ -7,9 +7,11 @@ use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
@@ -53,4 +55,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return str_ends_with($this->email, '@admin.filament') && $this->hasVerifiedEmail();
     }
+
+//    public function roles(): HasMany
+//    {
+//        return $this->hasMany(Role::class);
+//    }
 }
