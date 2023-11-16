@@ -1,0 +1,28 @@
+.login__partnerWrapper {
+    height: 44px;
+    border: 2px solid #dce0e3;
+    border-radius: 44px;
+    margin-top: 14px;
+    text-align: center;
+    padding-left: 16px;
+    position: relative;
+}
+
+.login__partnerWrapper:hover {
+    background-color: #dce0e3;
+    cursor: pointer;
+}
+  
+
+.login_partnerIcon {
+    position: absolute;
+    left: 0;
+    padding: 10px 0 8px 12px;
+}
+
+.login_partnerTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 40px;
+}
