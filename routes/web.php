@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+});
+
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'index'] )->name('dashboard');
 });

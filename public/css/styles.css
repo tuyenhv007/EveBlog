@@ -1,5 +1,6 @@
 :root {
     --primary-color: #7f00ff;
+    --secondary-color: #db0bd3;
     --black-color: #000;
     --white-color: #fff;
     --gray-color: #666;
@@ -46,7 +47,7 @@ html {
         padding-right: 12px;
     }
 
-    
+
 
     .column_l-8 {
         width: 66.66667%;

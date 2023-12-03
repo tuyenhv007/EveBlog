@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://kit.fontawesome.com/a331d69947.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @yield('css')
 </head>
@@ -32,9 +33,15 @@
         <input id="search-input" type="text" placeholder="Tìm kiếm bài viết...">
         <box-icon class="header__close-icon" name='x'></box-icon>
     </div>
-    <div class="header__btnLogin">
-        <a>Đăng nhập</a>
+    <div class="auth-btn-group">
+        <div class="header__btnLogin">
+            <a>Đăng nhập</a>
+        </div>
+        <div class="header__btnRegister">
+            <a>Đăng ký</a>
+        </div>
     </div>
+
 </header>
 
 <main class="main">
@@ -186,7 +193,7 @@
             <div class="register__container">
                 <div class="register__content">
                     <div class="register__back">
-                        <i class="fa-solid fa-angle-left"></i>
+                        <i class="fa-solid fa-angle-left register__back-js"></i>
                     </div>
                     <div class="register__header">
                         <a href="">
@@ -195,34 +202,40 @@
                         <h1>Đăng ký tài khoản Blog</h1>
                     </div>
                     <div class="register__body">
-                        <div class="register__form">
-                            <div class="formControl__wrapper">
-                                <div class="formInput__wrapper">
-                                    <div class="formInput__labelGroup">
-                                        <label class="formInput__label" for="">Email</label>
+                        <form action="{{ route('register.store') }}" method="POST">
+                            @csrf
+                            <div class="register__form">
+                                <div class="formControl__wrapper">
+                                    <div class="formInput__wrapper">
+                                        <div class="formInput__labelGroup">
+                                            <label class="formInput__label" for="">Email</label>
+                                        </div>
+                                        <div class="formInput__inputWrapper">
+                                            <input type="email" name="email" placeholder="Địa chỉ email">
+                                        </div>
                                     </div>
-                                    <div class="formInput__inputWrapper">
-                                        <input type="email" name="email" placeholder="Địa chỉ email">
+                                    @if($errors->has('email'))
+                                        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                                    @endif
+                                </div>
+                                <div class="formControl__wrapper">
+                                    <div class="formInput__wrapper">
+                                        <div class="formInput__labelGroup">
+
+                                        </div>
+                                        <div class="formInput__inputWrapper">
+                                            <input type="password" name="password" placeholder="Mật khẩu">
+                                        </div>
+                                        <div class="register__formPassHint">
+                                            <p>Gợi ý: Mật khẩu cần có ít nhất 8 kí tự</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="formControl__wrapper">
-                                <div class="formInput__wrapper">
-                                    <div class="formInput__labelGroup">
+                                <button type="submit" class="register__btnRegister">Đăng ký</button>
 
-                                    </div>
-                                    <div class="formInput__inputWrapper">
-                                        <input type="password" name="password" placeholder="Mật khẩu">
-                                    </div>
-                                    <div class="register__formPassHint">
-                                        <p>Gợi ý: Mật khẩu cần có ít nhất 8 kí tự</p>
-                                    </div>
-                                </div>
                             </div>
-                            <button class="register__btnRegister">Đăng ký</button>
-
-                        </div>
-                        <p class="register__dontHaveAcc">Bạn đã có tài khoản? <a href="">Đăng nhập</a></p>
+                        </form>
+                        <p class="register__dontHaveAcc">Bạn đã có tài khoản? <a href="#" class="linking-login">Đăng nhập</a></p>
                     </div>
                     <div class="register__acceptTerm">
                         <p>Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với <br>
@@ -291,7 +304,7 @@
                                 <span class="login_partnerTitle">Tiếp tục với Facebook</span>
                             </div>
                         </div>
-                        <p class="register__dontHaveAcc">Bạn chưa có tài khoản? <a href="">Đăng ký</a></p>
+                        <p class="register__dontHaveAcc">Bạn chưa có tài khoản? <a href="#" class="registerBtn">Đăng ký</a></p>
                     </div>
                     <div class="register__acceptTerm">
                         <p>Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với <br>
@@ -307,6 +320,34 @@
 
 @yield('scripts')
 </body>
+<script>
+    $('.auth__closeBtn').on('click', function() {
+        $('#modal_login').removeClass('displayFlex');
+        $('#modal_register').removeClass('displayFlex');
+    });
+
+    $('.header__btnRegister').on('click', function() {
+       $('#modal_register').addClass('displayFlex');
+    });
+
+    $('.linking-login').on('click', function() {
+       $('#modal_login').addClass('displayFlex');
+    });
+
+    $('.register__back-js').on('click', function() {
+        $('#modal_login').addClass('displayFlex');
+    });
+
+    $('.auth__modalWrapper').on('click', function() {
+        $('#modal_login').removeClass('displayFlex');
+        $('#modal_register').removeClass('displayFlex');
+    });
+
+    $('.auth__modalContent').on('click', function(event) {
+        event.stopPropagation();
+    });
+
+</script>
 <script src="{{ asset('js/header.js') }}"></script>
 <script src="{{ asset('js/register.js') }}"></script>
 
