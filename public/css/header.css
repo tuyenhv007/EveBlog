@@ -85,7 +85,7 @@
 .header__btnLogin a
 {
     text-decoration: none;
-    color: var(--white-color);
+    color: var(--white-color) !important;
     padding: 9px 20px;
     font-size: 1.4rem;
     font-weight: 600;
@@ -96,7 +96,7 @@
 .header__btnRegister a
 {
     text-decoration: none;
-    color: var(--white-color);
+    color: var(--white-color) !important;
     padding: 9px 20px;
     font-size: 1.4rem;
     font-weight: 600;

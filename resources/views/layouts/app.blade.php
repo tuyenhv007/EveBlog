@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://kit.fontawesome.com/a331d69947.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -208,15 +209,30 @@
                                 <div class="formControl__wrapper">
                                     <div class="formInput__wrapper">
                                         <div class="formInput__labelGroup">
+                                            <label class="formInput__label" for="">Tên</label>
+                                        </div>
+                                        <div class="formInput__inputWrapper">
+                                            <input type="text" name="name" placeholder="Tên người dùng">
+                                        </div>
+                                        @if($errors->has('name'))
+                                            <div class="text-danger" style="font-size: 14px; margin-left: 10px;">{{ $errors->first('name') }}</div>
+                                        @endif
+                                    </div>
+
+                                </div>
+                                <div class="formControl__wrapper">
+                                    <div class="formInput__wrapper">
+                                        <div class="formInput__labelGroup">
                                             <label class="formInput__label" for="">Email</label>
                                         </div>
                                         <div class="formInput__inputWrapper">
                                             <input type="email" name="email" placeholder="Địa chỉ email">
                                         </div>
+                                        @if($errors->has('email'))
+                                            <div class="text-danger" style="font-size: 14px; margin-left: 10px;">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
-                                    @if($errors->has('email'))
-                                        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
-                                    @endif
+
                                 </div>
                                 <div class="formControl__wrapper">
                                     <div class="formInput__wrapper">
@@ -226,6 +242,9 @@
                                         <div class="formInput__inputWrapper">
                                             <input type="password" name="password" placeholder="Mật khẩu">
                                         </div>
+                                        @if($errors->has('password'))
+                                            <div class="text-danger" style="font-size: 14px; margin-left: 10px;">{{ $errors->first('password') }}</div>
+                                        @endif
                                         <div class="register__formPassHint">
                                             <p>Gợi ý: Mật khẩu cần có ít nhất 8 kí tự</p>
                                         </div>
@@ -271,30 +290,39 @@
                     </div>
                     <div class="register__body">
                         <div class="register__form">
-                            <div class="formControl__wrapper">
-                                <div class="formInput__wrapper">
-                                    <div class="formInput__labelGroup">
-                                        <label class="formInput__label" for="">Email</label>
-                                    </div>
-                                    <div class="formInput__inputWrapper">
-                                        <input type="email" name="email" placeholder="Địa chỉ email">
+                            <form id="registerForm" method="POST">
+                                @csrf
+                                <div class="formControl__wrapper">
+                                    <div class="formInput__wrapper">
+                                        <div class="formInput__labelGroup">
+                                            <label class="formInput__label" for="">Email</label>
+                                        </div>
+                                        <div class="formInput__inputWrapper">
+                                            <input type="email" name="email" placeholder="Địa chỉ email">
+                                        </div>
+                                        <span class="text-danger" id="emailError">
+                                                <strong style="font-size: 12px;"></strong>
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="formControl__wrapper">
-                                <div class="formInput__wrapper">
-                                    <div class="formInput__labelGroup">
+                                <div class="formControl__wrapper">
+                                    <div class="formInput__wrapper">
+                                        <div class="formInput__labelGroup">
 
-                                    </div>
-                                    <div class="formInput__inputWrapper">
-                                        <input type="password" name="password" placeholder="Mật khẩu">
-                                    </div>
-                                    <div class="register__formPassHint">
-                                        <p>Gợi ý: Mật khẩu cần có ít nhất 8 kí tự</p>
+                                        </div>
+                                        <div class="formInput__inputWrapper">
+                                            <input type="password" name="password" placeholder="Mật khẩu">
+                                        </div>
+                                        <span class="text-danger" id="passwordError">
+                                                <strong style="font-size: 12px;"></strong>
+                                        </span>
+                                        <div class="register__formPassHint">
+                                            <p>Gợi ý: Mật khẩu cần có ít nhất 8 kí tự</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="register__btnRegister" id="login_submit">Đăng nhập</button>
+                                <button class="register__btnRegister" type="submit" id="login_submit">Đăng nhập</button>
+                            </form>
                             <div class="login__partnerWrapper">
                                 <img src="{{ asset('images/google-18px.svg') }}" alt="Đăng nhập với Google" class="login_partnerIcon">
                                 <span class="login_partnerTitle">Tiếp tục với Google</span>
@@ -319,7 +347,15 @@
 </div>
 
 @yield('scripts')
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>
+@if($errors->has('name') || $errors->has('email') || $errors->has('password'))
+    <script>
+    $(function() {
+        $('#modal_register').addClass('displayFlex');
+    })
+    </script>
+@endif
 <script>
     $('.auth__closeBtn').on('click', function() {
         $('#modal_login').removeClass('displayFlex');
@@ -346,6 +382,35 @@
     $('.auth__modalContent').on('click', function(event) {
         event.stopPropagation();
     });
+
+$(function () {
+    $('#registerForm').submit(function (e) {
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        $('.text-danger').children("strong").text("")
+        $.ajax({
+            method: "POST",
+            headers: {
+                Accept: "application/json"
+            },
+            url: "{{ route('login.store') }}",
+            data: formData,
+            success: () => window.location.assign("{{ route('dashboard') }}"),
+            error: (response) => {
+                if(response.status === 422) {
+                    let errors = response.responseJSON.errors;
+
+                    Object.keys(errors).forEach(function(key) {
+                        console.log(key)
+                        $("#" + key + "Error").children("strong").text(errors[key][0]);
+                    })
+                } else {
+                    window.location.reload();
+                }
+            }
+        })
+    })
+})
 
 </script>
 <script src="{{ asset('js/header.js') }}"></script>
