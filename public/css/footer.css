@@ -11,12 +11,12 @@
 .footer__warapperCol {
     display: flex;
     justify-content: center;
-    
+
 }
 
 .footer__warapperCol h2 {
     color: var(--white-color);
-    font-size: 1.8rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin: 10px 0 15px 0;
     text-transform: uppercase;
@@ -37,7 +37,7 @@
 }
 
 .footer__sloganTop {
-    font-size: 1.6rem;
+    font-size: 1rem;
     color: var(--white-color);
     font-weight: 600;
 }
@@ -45,7 +45,7 @@
 .footer__contactList {
     margin: 14px 0;
     color: #a9b3bb;
-    font-size: 1.4rem;
+    font-size: 1rem;
     line-height: 2.2rem;
 }
 
@@ -66,7 +66,7 @@
 .footer__heading a {
     text-decoration: none;
     color: var(--white-color);
-    font-size: 1.8rem;
+    font-size: 1rem;
     line-height: 1.6;
     font-weight: 600;
 }
@@ -74,7 +74,7 @@
 .footer__ulist {
     margin: 10px 0;
     list-style-type: none;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .footer__ulist li {
@@ -83,7 +83,7 @@
 
 .footer__ulist a {
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #a9b3bb;
     line-height: 2.2rem;
     transition: .3s ease;
@@ -102,16 +102,16 @@
 }
 
 .footer__copyright {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .footer__social a {
-    font-size: 3.2rem;
+    font-size: 1.6rem;
     margin-right: 15px;
 }
 
 .footer__social i {
-    font-size: 3.2rem;
+    font-size: 1.6rem;
 }
 
 .footer__social .fa-square-youtube {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="main__content">
+    <div class="main__content">
     <section class="main__section">
         <div class="main__containerLayout">
             <div class="main__containerTop">
