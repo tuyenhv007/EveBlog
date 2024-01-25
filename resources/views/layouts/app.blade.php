@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/top-bar.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,6 +40,7 @@
 
 <!-- Modal Login -->
 @include('auth.login')
+
 
 @yield('scripts')
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -71,6 +73,19 @@
         event.stopPropagation();
     });
 
+    $('#avatar_profile').on('click', function() {
+        // Đảo ngược giá trị của thuộc tính aria-expanded
+        var currentAriaExpanded = $(this).attr("aria-expanded");
+        $(this).attr("aria-expanded", currentAriaExpanded === "true" ? "false" : "true");
+        if(currentAriaExpanded === 'false') {
+            $('#tippy-7').removeClass('show-profile');
+            $('#tippy-7').css('display', 'none');
+        } else {
+            $('#tippy-7').addClass('show-profile');
+            $('#tippy-7').css('display', 'block');
+        }
+    });
+
 $(function () {
     $('#registerForm').submit(function (e) {
         e.preventDefault();
@@ -98,7 +113,9 @@ $(function () {
             }
         })
     })
-})
+});
+
+
 
 </script>
 <script src="{{ asset('js/header.js') }}"></script>

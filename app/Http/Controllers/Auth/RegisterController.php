@@ -16,7 +16,7 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => ['required', 'min:2'],
-            'email' => ['required', 'email', 'string', 'lowercase', 'max:255', 'unique:'. User::class],
+            'email' => ['required', 'email', 'string', 'lowercase', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'between:8,255', Password::defaults()->symbols()->letters()]
         ]);
 
@@ -30,6 +30,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('guest');
     }
 }
